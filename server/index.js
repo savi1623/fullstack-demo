@@ -8,7 +8,7 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get('/bug', (req, res) => {
   // get back all bug reports in the DBs
   Bug.find(req.body)
     .then((bug) => {
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     );
 });
 
-app.post('/', (req, res) => {
+app.post('/bug', (req, res) => {
   // send new bug to the server
     Bug.create(req.body)
     .then((bug) =>

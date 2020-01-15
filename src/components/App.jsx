@@ -38,7 +38,11 @@ class App extends React.Component {
   }
 
   addBug(e, newBug) {
-    fetch('http://localhost:3000/' + newBug)
+    //ok not fetch due we are posting to this address
+    fetch('http://localhost:3000/' , {
+      method: 'POST',
+      body: json.stringify(newBug);
+    })
       .then((results) => {
         return results.json();
       })
