@@ -16,7 +16,17 @@ class App extends React.Component {
   }
 
   filterHandler(filter) {
-    this.setState({ filter });
+    const bugArr = [];
+    this.state.bugs.map((bug) => {
+      if (bug.threatLevel === filter) {
+        bugArr.push(bug);
+      }
+      return bugArr;
+    });
+    this.setState({
+      filter,
+      bugs: bugArr,
+    });
   }
 
   render() {
