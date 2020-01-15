@@ -68,8 +68,6 @@ class Submit extends React.Component {
             assignedTo: z.target.value,
           });
         }} />
-        {/* comeback to this */}
-        <button onClick ={() => this.addtoNewBug()}>Add</button>
         <button onClick={(e) => this.props.addBug(e, this.state.newBug)}>Refresh</button>
       </form>
     );

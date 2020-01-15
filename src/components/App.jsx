@@ -16,6 +16,13 @@ class App extends React.Component {
     this.filterHandler = this.filterHandler.bind(this);
   }
 
+  componentDidMount() {
+    fetch('http://localhost:3000/')
+      .then((results) => {
+        return results.json();
+      });
+  }
+
   filterHandler(filter) {
     const bugArr = [];
     this.state.bugs.map((bug) => {
@@ -31,16 +38,35 @@ class App extends React.Component {
   }
 
   addBug(e, newBug) {
-    e.preventDefault();
-    this.setState({
-      bugs: [...this.state.bugs, newBug],
-    });
+    fetch('http://localhost:3000/' + newBug)
+      .then((results) => {
+        return results.json();
+      })
+      .then(bug => {
+        let bugObj = {};
+        // let bugName = bug.bugname;
+        let bugDescription = bug.bugDescription;
+        let reportedBy = bug.reportedBy;
+        // let createdDate =
+        let assignedTo = bug.assignedTo;
+        let threatLevel = bug.threatLevel;
+        bugObj.bugDescription = bugDescription;
+        bugObj.reportedBy = reportedBy;
+        bugObj.assignedTo = assignedTo;
+        bugObj.threatLevel = threatLevel;
+        return bugObj;
+      })
+      .then((bugObj) => {
+        this.setState({
+          bugs: [...this.state.bugs, bugObj],
+        });
+      });
   }
 
   render() {
     return (
       <div>
-        <Submit bugs = {this.state.bugs} addBug = {this.addBug.bind(this)}/>
+        <Submit bugs={this.state.bugs} addBug={this.addBug.bind(this)} />
         <table>
           <Nav
             filterHandler={this.filterHandler}
