@@ -40,7 +40,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Submit addBug = {this.addBug.bind(this)}/>
+        <Submit bugs = {this.state.bugs} addBug = {this.addBug.bind(this)}/>
         <table>
           <Nav
             filterHandler={this.filterHandler}
