@@ -1,4 +1,5 @@
 import React from 'react';
+import Submit from './Submit.jsx';
 import Nav from './Nav.jsx';
 import BugTile from './BugTile.jsx';
 import exampleData from '../example-data/exampleData';
@@ -29,24 +30,34 @@ class App extends React.Component {
     });
   }
 
+  addBug(e, newBug) {
+    e.preventDefault();
+    this.setState({
+      bugs: [...this.state.bugs, newBug],
+    });
+  }
+
   render() {
     return (
-      <table>
-        <Nav
-          filterHandler={this.filterHandler}
-        />
-        {this.state.bugs.map((bug) => (
-          <BugTile
-            bugName={bug.bugName}
-            bugDescription={bug.bugDescription}
-            reportedBy={bug.reportedBy}
-            createdDate={bug.createdDate}
-            assignedTo={bug.assignedTo}
-            threatLevel={bug.threatLevel}
-            key={bug.bugName}
+      <div>
+        <Submit addBug = {this.addBug.bind(this)}/>
+        <table>
+          <Nav
+            filterHandler={this.filterHandler}
           />
-        ))}
-      </table>
+          {this.state.bugs.map((bug) => (
+            <BugTile
+              bugName={bug.bugName}
+              bugDescription={bug.bugDescription}
+              reportedBy={bug.reportedBy}
+              createdDate={bug.createdDate}
+              assignedTo={bug.assignedTo}
+              threatLevel={bug.threatLevel}
+              key={bug.bugName}
+            />
+          ))}
+        </table>
+      </div>
     );
   }
 }
