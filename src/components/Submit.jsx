@@ -10,7 +10,6 @@ class Submit extends React.Component {
       assignedTo: '',
       bugName: '',
       createdDate: '',
-      newBug: {},
     };
   }
 
@@ -68,7 +67,7 @@ class Submit extends React.Component {
             assignedTo: z.target.value,
           });
         }} />
-        <button onClick={(e) => this.props.addBug(e, this.state.newBug)}>Refresh</button>
+        <button onClick={(e) => this.props.addBug(e, this.state)}>Add</button>
       </form>
     );
   }
